@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>soundtag</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('main.png') no-repeat center center/cover;
+        }
+        h1 {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Страница 1 (звук P)</h1>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let audio = new Audio("t.mp3");
+            audio.loop = true;
+            
+            // Попытка автоматического воспроизведения
+            audio.play().catch(() => {
+                // В случае блокировки браузером, включаем воспроизведение при первом клике
+                document.body.addEventListener("click", () => {
+                    audio.play();
+                }, { once: true });
+            });
+        });
+    </script>
+</body>
+</html>
