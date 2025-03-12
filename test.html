@@ -21,17 +21,20 @@
 <body>
     <h1>Страница 1 (звук P)</h1>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
             let audio = new Audio("t.mp3");
             audio.loop = true;
             
-            // Попытка автоматического воспроизведения
-            audio.play().catch(() => {
-                // В случае блокировки браузером, включаем воспроизведение при первом клике
-                document.body.addEventListener("click", () => {
-                    audio.play();
-                }, { once: true });
-            });
+            setTimeout(async () => {
+                try {
+                    await audio.play();
+                } catch (error) {
+                    console.log("Автовоспроизведение заблокировано, ожидаем взаимодействия пользователя.");
+                    document.body.addEventListener("click", async () => {
+                        await audio.play();
+                    }, { once: true });
+                }
+            }, 2000); // Задержка 2 секунды перед воспроизведением
         });
     </script>
 </body>
