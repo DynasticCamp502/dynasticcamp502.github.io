@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Страница 1</title>
+    <title>soundtag</title>
     <style>
         body {
             display: flex;
@@ -11,34 +11,31 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #222;
+            background: url('main.png') no-repeat center center/cover;
         }
         h1 {
             color: white;
-        }
-        button {
-            font-size: 20px;
-            padding: 15px 30px;
-            background-color: #ff5722;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Страница 1 (звук P)</h1>
-    <button onclick="playSound()">▶️ Играть звук</button>
-
     <script>
-        let audio = new Audio("f.mp3");
-        audio.loop = true;
-
-        function playSound() {
-            audio.play().catch(error => console.error("Ошибка воспроизведения:", error));
-        }
+        document.addEventListener("DOMContentLoaded", async () => {
+            let audio = new Audio("f.mp3");
+            audio.loop = true;
+            
+            setTimeout(async () => {
+                try {
+                    await audio.play();
+                } catch (error) {
+                    console.log("Автовоспроизведение заблокировано, ожидаем взаимодействия пользователя.");
+                    document.body.addEventListener("click", async () => {
+                        await audio.play();
+                    }, { once: true });
+                }
+            }, 2000); // Задержка 2 секунды перед воспроизведением
+        });
     </script>
 </body>
 </html>
