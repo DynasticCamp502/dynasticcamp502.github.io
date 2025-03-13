@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,15 +12,18 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('main.png') no-repeat center center/cover;
+            margin: 0;
+            background: url('main.png') no-repeat center center;
+            background-size: contain;
+            background-color: white; /* Фон на случай пустых областей */
         }
         h1 {
             color: white;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Страница 1 (звук P)</h1>
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
             let audio = new Audio("t.mp3");
